@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TravelBookSystem:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="TravelBookSystem.war">
+      <element id="artifact" artifact-name="TravelBookSystem:war exploded" />
+    </root>
+  </artifact>
+</component>
