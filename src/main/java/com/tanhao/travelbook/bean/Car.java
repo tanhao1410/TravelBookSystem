@@ -1,15 +1,15 @@
 package com.tanhao.travelbook.bean;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 @Table(name="car")
 public class Car implements Serializable{
 
-    @Column(name="carId")
-    private String carId;
-    @Column(name="cityId")
-    private String cityId;
+    @Column(name="cityName")
+    private String cityName;
+    @Id
     @Column(name="carNum")
     private String carNum;
     @Column(name="price")
@@ -23,21 +23,12 @@ public class Car implements Serializable{
         this.carNum = carNum;
     }
 
-    public String getCarId() {
-        return carId;
-
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCarId(String carId) {
-        this.carId = carId;
-    }
-
-    public String getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(String cityId) {
-        this.cityId = cityId;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public int getPrice() {

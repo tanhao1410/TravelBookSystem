@@ -1,5 +1,5 @@
 //查询航班
-function searchFlight(){
+function searchCar(){
 
     while($("#flightTr").next()[0] != undefined){
         $("#flightTr").next().remove();
@@ -7,18 +7,16 @@ function searchFlight(){
     $.ajax({
         type : "GET",
         dataType : "json",
-        url : "/flight/getFlightByParam?fromCity="+$("#fromCity").val()+"&arivCity="+$("#arivCity").val()+"&date="+$("#date").val(),
+        url : "/car/getCarByParam?cityName="+$("#cityName").val()+"&date="+$("#date").val(),
         data : "",
         success : function(data) {
             for(var i =0;i <data.length;i ++){
                 //创建一行
-                var td1 = "<td>"+data[i].flightNum+"</td>";
+                var td1 = "<td>"+data[i].carNum+"</td>";
                 var td2 = "<td>"+data[i].price+"</td>";
-                var td5 = "<td>"+data[i].numSeats+"</td>";
-                var td3 = "<td>"+data[i].fromCity+"</td>";
-                var td4 = "<td>"+data[i].arivCity+"</td>";
-                var td6 = "<td>"+"<a onclick=\"resevFlight(\'"+data[i].flightNum+"\')\" >"+"预约</a></td>";
-                var tr = "<tr>"+td1+td2+td3+td4+td5+td6+"</tr>";
+                var td5 = "<td>"+data[i].cityName+"</td>";
+                var td6 = "<td>"+"<a onclick=\"resevCar(\'"+data[i].carNum+"\')\" >"+"预约</a></td>";
+                var tr = "<tr>"+td1+td2+td5+td6+"</tr>";
                 $("#flightTr").after(tr);
             }
         },
@@ -28,22 +26,22 @@ function searchFlight(){
     });
 }
 
-function resevFlight(flightNum) {
+function resevCar(carNum) {
 
     var custName = getQueryVariable("custName")
     //发起预约
     $.ajax({
         type : "GET",
         dataType : "json",
-        url : "/reservation/flight?custName="+custName+"&flightNum="+flightNum+"&date="+$("#date").val(),
+        url : "/reservation/car?custName="+custName+"&carNum="+carNum+"&date="+$("#date").val(),
         data : "",
         success : function(data) {
-            searchFlight();
+            searchCar();
             alert("成功预约");
             return;
         },
         error : function(data) {
-            searchFlight();
+            searchCar();
             alert("成功预约");
             return;
         }

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -50,8 +49,8 @@ public class FlightService extends BaseService<Flight>{
             //获取该航班还剩下多少个座位
             Example example2 = new Example(FlightReservation.class);
             Example.Criteria criteria2 = example2.createCriteria();
-            criteria2.andEqualTo("flightId",flight1.getFlightId());
             criteria2.andEqualTo("resDate",date1);
+            criteria2.andEqualTo("flightNum",flight1.getFlightNum());
             int count =  reservationService.flightReservationMapper.selectCountByExample(example2);
 
             flight1.setNumSeats(flight1.getNumSeats() - count);

@@ -7,37 +7,27 @@ import java.sql.Date;
 @Table(name="FlightReservation")
 public class FlightReservation {
 
-    @Column(name="id")
-    private String id;
-    @Column(name="flightId")
-    private String flightId;
-    @Column(name="custId")
-    private String custId;
+    @Column(name="flightNum")
+    private String flightNum;
+    @Column(name="custName")
+    private String custName;
     @Column(name="resDate")
     private Date resDate;
 
-    public String getId() {
-        return id;
+    public String getFlightNum() {
+        return flightNum;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFlightNum(String flightNum) {
+        this.flightNum = flightNum;
     }
 
-    public String getFlightId() {
-        return flightId;
+    public String getCustName() {
+        return custName;
     }
 
-    public void setFlightId(String flightId) {
-        this.flightId = flightId;
-    }
-
-    public String getCustId() {
-        return custId;
-    }
-
-    public void setCustId(String custId) {
-        this.custId = custId;
+    public void setCustName(String custName) {
+        this.custName = custName;
     }
 
     public Date getResDate() {

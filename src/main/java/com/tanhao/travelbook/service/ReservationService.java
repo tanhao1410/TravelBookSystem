@@ -1,6 +1,6 @@
 package com.tanhao.travelbook.service;
 
-import com.github.abel533.entity.Example;
+import com.tanhao.travelbook.bean.CarReservation;
 import com.tanhao.travelbook.bean.FlightReservation;
 import com.tanhao.travelbook.dao.CarReservationMapper;
 import com.tanhao.travelbook.dao.FlightReservationMapper;
@@ -32,9 +32,8 @@ public class ReservationService {
         Date date1 = new Date(date2.getTime());
 
         fr.setResDate(date1);
-        fr.setFlightId(flightId);
-        fr.setCustId(custId);
-        fr.setId(UUID.randomUUID().toString());
+        fr.setFlightNum(flightId);
+        fr.setCustName(custId);
         //预约一个飞机航班
         flightReservationMapper.insert(fr);
     }
@@ -42,5 +41,19 @@ public class ReservationService {
     public void flightReservCancel(String id) {
         //取消航班
         flightReservationMapper.deleteByPrimaryKey(id);
+    }
+
+    public void reservCar(String carNum, String custName, String date) throws  Exception{
+        CarReservation cr = new CarReservation();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date2 = sdf.parse(date);
+        Date date1 = new Date(date2.getTime());
+
+        cr.setCarNum(carNum);
+        cr.setCustName(custName);
+        cr.setResDate(date1);
+
+        carReservationMapper.insert(cr);
+
     }
 }

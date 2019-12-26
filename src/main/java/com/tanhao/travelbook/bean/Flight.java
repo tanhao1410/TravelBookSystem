@@ -1,14 +1,14 @@
 package com.tanhao.travelbook.bean;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
 @Table(name="flight")
 public class Flight  implements Serializable {
 
-    @Column(name="flightId")
-    private String flightId;
+    @Id
     @Column(name="flightNum")
     private String flightNum;
     @Column(name="price")
@@ -34,14 +34,6 @@ public class Flight  implements Serializable {
 
     public void setArivCity(String arivCity) {
         this.arivCity = arivCity;
-    }
-
-    public String getFlightId() {
-        return flightId;
-    }
-
-    public void setFlightId(String flightId) {
-        this.flightId = flightId;
     }
 
     public String getFlightNum() {

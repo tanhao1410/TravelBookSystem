@@ -41,4 +41,6 @@ class FlightController extends BaseController<Flight>{
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 
     }
+
+
 }

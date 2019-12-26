@@ -21,9 +21,24 @@ class ReservationController {
 
     @ResponseBody
     @RequestMapping( value="/flight",method = RequestMethod.GET)
-    public ResponseEntity getFlightByParam(@RequestParam("flightId") String flightId, @RequestParam("custId") String custId, @RequestParam("date")String date) {
+    public ResponseEntity getFlightByParam(@RequestParam("flightNum") String flightNum, @RequestParam("custName") String custName, @RequestParam("date")String date) {
         try {
-            reservationService.reservFlight(flightId, custId, date);
+            custName = new String(custName.getBytes("ISO-8859-1"), "utf-8");
+            reservationService.reservFlight(flightNum, custName, date);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
+
+    @ResponseBody
+    @RequestMapping( value="/car",method = RequestMethod.GET)
+    public ResponseEntity reservCar(@RequestParam("carNum") String carNum, @RequestParam("custName") String custName, @RequestParam("date")String date) {
+        try {
+            custName = new String(custName.getBytes("ISO-8859-1"), "utf-8");
+            carNum = new String(carNum.getBytes("ISO-8859-1"), "utf-8");
+            reservationService.reservCar(carNum, custName, date);
             return ResponseEntity.status(HttpStatus.OK).body(null);
         } catch (Exception e) {
             e.printStackTrace();

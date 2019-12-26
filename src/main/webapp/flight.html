@@ -18,21 +18,31 @@
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 
     <script src="js/flight.js"></script>
-    <script src="js/button.js"></script>
+    <script src="js/common.js"></script>
 </head>
 <body>
 <div class="page-header">
     <h1>旅游预订系统
-        <small>v0.1</small>
-        <!--<small >系统当前共有1台采集服务器上线，共监测设备数量为：100台</small>-->
+        <small>航班管理</small>
     </h1>
 
     <h3>
-        <a href="index.html">回到首页</a>
-        <a href="javacript:void(0);" onclick="searchFlight()" target="_self">增加航班</a>
+        <a onclick="returnFirstPage()">回到首页</a>
     </h3>
 </div>
-
+<div class="lgD"  id="addFlightDiv">
+    <input id = "flightNum" type="text"
+           placeholder="航班号" />
+    <input id="fromCity" type="text"
+           placeholder="出发点" />
+    <input id="arivCity" type="text"
+           placeholder="目的地" />
+    <input id="numSeats" type="text"
+           placeholder="总座位数" />
+    <input id="price" type="text"
+           placeholder="价格" />
+    <a onclick="addFlight()" target="_self"><button>添加</button></a>
+</div>
 <table id="flightTable"  style="width:100%">
     <thead>
     <tr id="flightTr">
@@ -45,6 +55,7 @@
     </tr>
     </thead>
 </table>
+
 
 </body>
 </html>

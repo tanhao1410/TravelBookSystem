@@ -1,43 +1,35 @@
 package com.tanhao.travelbook.bean;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 
 public class Hotel {
 
-    @Column(name="hotelId")
-    private String hotelId;
-    @Column(name="name")
-    private String name;
-    @Column(name="cityId")
-    private String cityId;
+    @Id
+    @Column(name="hotelName")
+    private String hotelName;
+
+    @Column(name="cityName")
+    private String cityName;
     @Column(name="price")
     private int price;
-
-    public String getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(String hotelId) {
-        this.hotelId = hotelId;
-    }
-
-    public String getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(String cityId) {
-        this.cityId = cityId;
-    }
-
+    @Column(name="numRooms")
     private int numRooms;
-    private int numAvail;
 
-    public String getName() {
-        return name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
     }
 
     public int getPrice() {
@@ -49,18 +41,11 @@ public class Hotel {
     }
 
     public int getNumRooms() {
-        return numRooms;
+        return this.numRooms;
     }
 
     public void setNumRooms(int numRooms) {
         this.numRooms = numRooms;
     }
 
-    public int getNumAvail() {
-        return numAvail;
-    }
-
-    public void setNumAvail(int numAvail) {
-        this.numAvail = numAvail;
-    }
 }

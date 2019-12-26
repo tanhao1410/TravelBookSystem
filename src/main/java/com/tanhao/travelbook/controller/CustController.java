@@ -32,23 +32,5 @@ class CustController extends BaseController<Customer>{
         return this.custService;
     }
 
-    @ResponseBody
-    @RequestMapping( method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody String json) {
-        try {
 
-            Map result = new HashMap();
-            Customer customer = JSONObject.parseObject(json,Customer.class);
-
-            String id = UUID.randomUUID().toString();
-            customer.setCustId(id);
-
-            result.put("custId",id);
-            this.getService().create(customer);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-    }
 }

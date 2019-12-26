@@ -5,35 +5,27 @@ import javax.persistence.Table;
 import java.sql.Date;
 @Table(name="HotelReservation")
 public class HotelReservation {
-    @Column(name="id")
-    private String id;
-    @Column(name="hotelId")
-    private String hotelId;
-    @Column(name="custId")
-    private String custId;
+    @Column(name="hotelName")
+    private String hot;
+    @Column(name="custName")
+    private String custName;
+    @Column(name="resDate")
+    private Date resDate;
 
-    public String getId() {
-        return id;
+    public String getHot() {
+        return hot;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setHot(String hot) {
+        this.hot = hot;
     }
 
-    public String getHotelId() {
-        return hotelId;
+    public String getCustName() {
+        return custName;
     }
 
-    public void setHotelId(String hotelId) {
-        this.hotelId = hotelId;
-    }
-
-    public String getCustId() {
-        return custId;
-    }
-
-    public void setCustId(String custId) {
-        this.custId = custId;
+    public void setCustName(String custName) {
+        this.custName = custName;
     }
 
     public Date getResDate() {
@@ -43,6 +35,4 @@ public class HotelReservation {
     public void setResDate(Date resDate) {
         this.resDate = resDate;
     }
-
-    private Date resDate;
 }

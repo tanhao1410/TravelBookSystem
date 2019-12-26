@@ -1,11 +1,15 @@
 package com.tanhao.travelbook.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tanhao.travelbook.bean.Customer;
 import com.tanhao.travelbook.service.BaseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -26,6 +30,7 @@ abstract class BaseController <T>{
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getOneById(@PathVariable("id") String id) {
         try {
+            id = new String(id.getBytes("ISO-8859-1"), "utf-8");
             T result = this.getService().getById(id);
             return ResponseEntity.status(HttpStatus.OK).body(result);
         } catch (Exception e) {
@@ -50,6 +55,7 @@ abstract class BaseController <T>{
     @RequestMapping( "/delete")
     public ResponseEntity delete(@RequestParam("id") String id) {
         try {
+            id = new String(id.getBytes("ISO-8859-1"), "utf-8");
             this.getService().deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body(null);
         } catch (Exception e) {
@@ -58,7 +64,20 @@ abstract class BaseController <T>{
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
+    @ResponseBody
+    @RequestMapping( method = RequestMethod.POST)
+    public ResponseEntity create(@RequestBody String json) {
+        try {
 
+            Map result = new HashMap();
+            T t =(T)JSONObject.parseObject(json);
+            this.getService().create(t);
+            return ResponseEntity.status(HttpStatus.OK).body(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
 
     @ResponseBody
     @RequestMapping( value = "/update" ,method = RequestMethod.POST)

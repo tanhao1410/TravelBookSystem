@@ -8,12 +8,10 @@ import java.sql.Date;
 public class CarReservation implements Serializable{
     @Column(name="resDate")
     private Date resDate;
-    @Column(name="id")
-    private String id;
-    @Column(name="carId")
-    private String carId;
-    @Column(name="custId")
-    private String custId;
+    @Column(name="carNum")
+    private String carNum;
+    @Column(name="custName")
+    private String custName;
 
     public Date getResDate() {
         return resDate;
@@ -23,27 +21,20 @@ public class CarReservation implements Serializable{
         this.resDate = resDate;
     }
 
-    public String getId() {
-        return id;
+
+    public String getCarNum() {
+        return carNum;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCarNum(String carNum) {
+        this.carNum = carNum;
     }
 
-    public String getCarId() {
-        return carId;
+    public String getCustName() {
+        return custName;
     }
 
-    public void setCarId(String carId) {
-        this.carId = carId;
-    }
-
-    public String getCustId() {
-        return custId;
-    }
-
-    public void setCustId(String custId) {
-        this.custId = custId;
+    public void setCustName(String custName) {
+        this.custName = custName;
     }
 }

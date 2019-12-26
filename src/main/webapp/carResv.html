@@ -17,19 +17,19 @@
     <script src="jslib/jquery.dataTables.min.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 
-    <script src="js/index.js"></script>
+    <script src="js/carResv.js"></script>
     <script src="js/common.js"></script>
 </head>
 <body>
 <div class="page-header">
     <h1>旅游预订系统
-        <small>预约航班</small>
+        <small>预约出租车</small>
     </h1>
 
     <h3>
 
+        <a onclick="returnFirstPage()">回到首页</a>
         <a onclick="hotelResvPage()">旅馆预约</a>
-        <a onclick="carResvPage()">出租车预约</a>
 
         <a onclick="flightManagerPage()">航班管理</a>
         <a onclick="hotelManagerPage()">旅馆管理</a>
@@ -40,25 +40,21 @@
 </div>
 
 <div class="lgD">
-    <input id = "fromCity" type="text" value="北京"
+    <input id = "cityName" type="text" value="北京"
            placeholder="出发地" />
-    <input id="arivCity" type="text" value="上海"
-           placeholder="到达地" />
     <input id="date" type="text" value="2019-02-03"
            placeholder="日期,按：2019-02-03输入" />
 
-    <a onclick="searchFlight()" target="_self"><button>查  询</button></a>
+    <a onclick="searchCar()" target="_self"><button>查  询</button></a>
 </div>
 
 
 <table id="flightTable"  style="width:100%">
     <thead>
     <tr id="flightTr">
-        <th>航班号</th>
+        <th>出租车号</th>
         <th>价格</th>
-        <th>出发地</th>
-        <th>到达地</th>
-        <th>余票</th>
+        <th>所在城市</th>
         <th>操作</th>
     </tr>
     </thead>
