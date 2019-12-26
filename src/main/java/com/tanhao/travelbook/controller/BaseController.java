@@ -58,18 +58,7 @@ abstract class BaseController <T>{
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
-    @ResponseBody
-    @RequestMapping( method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody String json) {
-        try {
-            T flight = (T)JSONObject.parseObject(json);
-            this.getService().create(flight);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-    }
+
 
     @ResponseBody
     @RequestMapping( value = "/update" ,method = RequestMethod.POST)

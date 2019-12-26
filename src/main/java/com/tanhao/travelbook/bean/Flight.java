@@ -1,16 +1,48 @@
 package com.tanhao.travelbook.bean;
 
-public class Flight {
-    //老师要求的字段
+import javax.persistence.Column;
+import javax.persistence.Table;
+import java.io.Serializable;
+
+@Table(name="flight")
+public class Flight  implements Serializable {
+
+    @Column(name="flightId")
+    private String flightId;
+    @Column(name="flightNum")
     private String flightNum;
+    @Column(name="price")
     private int price;
+    @Column(name="numSeats")
     private int numSeats;
-    private int numAvail;
-    private String FromCity;
-    private String ArivCity;
+    @Column(name="fromCity")
+    private String fromCity;
+    @Column(name="arivCity")
+    private String arivCity;
 
-    //额外增加的字段
+    public String getFromCity() {
+        return fromCity;
+    }
 
+    public void setFromCity(String fromCity) {
+        this.fromCity = fromCity;
+    }
+
+    public String getArivCity() {
+        return arivCity;
+    }
+
+    public void setArivCity(String arivCity) {
+        this.arivCity = arivCity;
+    }
+
+    public String getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(String flightId) {
+        this.flightId = flightId;
+    }
 
     public String getFlightNum() {
         return flightNum;
@@ -36,27 +68,4 @@ public class Flight {
         this.numSeats = numSeats;
     }
 
-    public int getNumAvail() {
-        return numAvail;
-    }
-
-    public void setNumAvail(int numAvail) {
-        this.numAvail = numAvail;
-    }
-
-    public String getFromCity() {
-        return FromCity;
-    }
-
-    public void setFromCity(String fromCity) {
-        FromCity = fromCity;
-    }
-
-    public String getArivCity() {
-        return ArivCity;
-    }
-
-    public void setArivCity(String arivCity) {
-        ArivCity = arivCity;
-    }
 }

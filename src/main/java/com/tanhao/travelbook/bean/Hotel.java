@@ -1,10 +1,34 @@
 package com.tanhao.travelbook.bean;
 
+import javax.persistence.Column;
+
 public class Hotel {
 
+    @Column(name="hotelId")
+    private String hotelId;
+    @Column(name="name")
     private String name;
-    private String location;
+    @Column(name="cityId")
+    private String cityId;
+    @Column(name="price")
     private int price;
+
+    public String getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(String hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
     private int numRooms;
     private int numAvail;
 
@@ -14,14 +38,6 @@ public class Hotel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public int getPrice() {
