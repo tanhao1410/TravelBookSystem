@@ -6,18 +6,18 @@ import java.sql.Date;
 @Table(name="HotelReservation")
 public class HotelReservation {
     @Column(name="hotelName")
-    private String hot;
+    private String hotelName;
     @Column(name="custName")
     private String custName;
     @Column(name="resDate")
     private Date resDate;
 
-    public String getHot() {
-        return hot;
+    public String getHotelName() {
+        return hotelName;
     }
 
-    public void setHot(String hot) {
-        this.hot = hot;
+    public void setHotelName(String hot) {
+        this.hotelName = hot;
     }
 
     public String getCustName() {

@@ -14,7 +14,6 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css">
 
     <script src="jslib/jquery.js"></script>
-    <script src="jslib/jquery.dataTables.min.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 
     <script src="js/car.js"></script>
@@ -27,7 +26,13 @@
     </h1>
 
     <h3>
-        <a onclick="returnFirstPage()">回到首页</a>
+        <a onclick="custManagerPage()">个人中心</a>
+        <a onclick="flightPage()">航班预约</a>
+        <a onclick="hotelResvPage()">旅馆预约</a>
+        <a onclick="carResvPage()">出租车预约</a>
+        <a class="admin" style="display:none;" onclick="flightManagerPage()">航班管理</a>
+        <a class="admin"  style="display:none;" onclick="hotelManagerPage()">旅馆管理</a>
+        <a class="admin" style="display:none;" onclick="carManagerPage()">出租车管理</a>
     </h3>
 </div>
 <div class="lgD" >

@@ -73,3 +73,8 @@ INSERT INTO `city` VALUES ('上海');
 INSERT INTO `city` VALUES ('北京');
 INSERT INTO `city` VALUES ('南京');
 INSERT INTO `city` VALUES ('苏州');
+
+INSERT INTO `flight` VALUES ('A121', '50', '100', '北京', '上海');
+INSERT INTO `flight` VALUES ('A122', '60', '100', '北京', '上海');
+INSERT INTO `flight` VALUES ('A1121', '50', '100', '北京', '南京');
+INSERT INTO `flight` VALUES ('A1122', '60', '100', '北京', '南京');

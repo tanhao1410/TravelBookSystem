@@ -11,12 +11,21 @@ function hotelManagerPage(){
     window.location.href="/hotel.html?custName="+getQueryVariable("custName");
 }
 
+//进入航班预约页面
+function flightPage(){
+    window.location.href="/flightResv.html?custName="+getQueryVariable("custName");
+}
 //进入出租车预约页面
 function carResvPage(){
     window.location.href="/carResv.html?custName="+getQueryVariable("custName");
 }
 
-function returnFirstPage(){
+//进入宾馆预约页面
+function hotelResvPage(){
+    window.location.href="/hotelResv.html?custName="+getQueryVariable("custName");
+}
+
+function custManagerPage(){
     window.location.href="/index.html?custName="+getQueryVariable("custName");
 }
 
