@@ -89,4 +89,17 @@ class ReservationController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
 
+    @ResponseBody
+    @RequestMapping( value="/mytravel",method = RequestMethod.GET)
+    public ResponseEntity myTravel( @RequestParam("custName") String custName) {
+        try {
+            custName = new String(custName.getBytes("ISO-8859-1"), "utf-8");
+            List list = reservationService.getMyTravel(custName);
+            return ResponseEntity.status(HttpStatus.OK).body(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
+
 }

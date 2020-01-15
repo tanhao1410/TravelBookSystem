@@ -14,11 +14,7 @@ import java.util.*;
 public class ReservationService {
 
     @Autowired
-    CarReservationMapper carReservationMapper;
-    @Autowired
-    HotelReservationMapper hotelReservationMapper;
-    @Autowired
-    FlightReservationMapper flightReservationMapper;
+    ReservationMapper reservationMapper;
     @Autowired
     FlightMapper flightMapper;
     @Autowired
@@ -35,17 +31,18 @@ public class ReservationService {
      */
     public void reservFlight(String flightId, String custId, String date) throws Exception{
 
-        FlightReservation fr = new FlightReservation();
+        Reservation fr = new Reservation();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date2 = sdf.parse(date);
         Date date1 = new Date(date2.getTime());
 
         fr.setResDate(date1);
-        fr.setFlightNum(flightId);
+        fr.setResvKey(flightId);
         fr.setCustName(custId);
+        fr.setType(1);
         //预约一个飞机航班
-        flightReservationMapper.insert(fr);
+        reservationMapper.insert(fr);
     }
 
     /**
@@ -56,16 +53,17 @@ public class ReservationService {
      * @throws Exception
      */
     public void reservCar(String carNum, String custName, String date) throws  Exception{
-        CarReservation cr = new CarReservation();
+        Reservation cr = new Reservation();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date2 = sdf.parse(date);
         Date date1 = new Date(date2.getTime());
 
-        cr.setCarNum(carNum);
+        cr.setResvKey(carNum);
         cr.setCustName(custName);
         cr.setResDate(date1);
+        cr.setType(3);
 
-        carReservationMapper.insert(cr);
+        reservationMapper.insert(cr);
 
     }
 
@@ -77,16 +75,17 @@ public class ReservationService {
      * @throws Exception
      */
     public void reservHotel(String hotelName, String custName, String date) throws  Exception{
-        HotelReservation hr = new HotelReservation();
+        Reservation hr = new Reservation();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date2 = sdf.parse(date);
         Date date1 = new Date(date2.getTime());
 
         hr.setCustName(custName);
-        hr.setHotelName(hotelName);
+        hr.setResvKey(hotelName);
         hr.setResDate(date1);
+        hr.setType(2);
 
-        hotelReservationMapper.insert(hr);
+        reservationMapper.insert(hr);
     }
 
     /**
@@ -113,64 +112,52 @@ public class ReservationService {
     date + "
          */
         //查询所有的宾馆预约
-        Example hotelExample = new Example(HotelReservation.class);
+        Example hotelExample = new Example(Reservation.class);
         Example.Criteria criteria = hotelExample.createCriteria();
         criteria.andEqualTo("custName",custName);
-        List<HotelReservation> hotelReservations = hotelReservationMapper.selectByExample(hotelExample);
-        for(HotelReservation  hr :hotelReservations){
+        List<Reservation> hotelReservations = reservationMapper.selectByExample(hotelExample);
+        for(Reservation  hr :hotelReservations){
             Map<String,String> map = new HashMap();
 
-            //查询出宾馆信息
-           Hotel hotel =  hotelMapper.selectByPrimaryKey(hr.getHotelName());
-           map.put("type","宾馆预约");
-           map.put("name",hotel.getHotelName());
-           map.put("price",String.valueOf(hotel.getPrice()));
-           map.put("cityName",hotel.getCityName());
-           map.put("date",sdf.format(hr.getResDate()));
+            switch (hr.getType()){
+                //查询所有的航班预约
+                case 1:
 
-           result.add(map);
+                    //查询出航班信息
+                    Flight flight =  flightMapper.selectByPrimaryKey(hr.getResvKey());
+                    map.put("type","航班预约");
+                    map.put("name",flight.getFlightNum());
+                    map.put("price",String.valueOf(flight.getPrice()));
+                    map.put("cityName",flight.getFromCity() +"-->"+flight.getArivCity());
+                    map.put("date",sdf.format(hr.getResDate()));
 
+                    result.add(map);
+                    break;
+                case 2:
+                    //查询出宾馆信息
+                    Hotel hotel =  hotelMapper.selectByPrimaryKey(hr.getResvKey());
+                    map.put("type","宾馆预约");
+                    map.put("name",hotel.getHotelName());
+                    map.put("price",String.valueOf(hotel.getPrice()));
+                    map.put("cityName",hotel.getCityName());
+                    map.put("date",sdf.format(hr.getResDate()));
+
+                    result.add(map);
+                    break;
+                //查询所有的出租车预约
+                case 3:
+
+                    Car car =  carMapper.selectByPrimaryKey(hr.getResvKey());
+                    map.put("type","出租车预约");
+                    map.put("name",car.getCarNum());
+                    map.put("price",String.valueOf(car.getPrice()));
+                    map.put("cityName",car.getCityName());
+                    map.put("date",sdf.format(hr.getResDate()));
+
+                    result.add(map);
+                    break;
+            }
         }
-        //查询所有的航班预约
-        Example flightExample = new Example(FlightReservation.class);
-        Example.Criteria criteria2 = flightExample.createCriteria();
-        criteria2.andEqualTo("custName",custName);
-        List<FlightReservation> flightReservations = flightReservationMapper.selectByExample(flightExample);
-        for(FlightReservation  fr :flightReservations){
-            Map<String,String> map = new HashMap();
-
-            //查询出航班信息
-            Flight flight =  flightMapper.selectByPrimaryKey(fr.getFlightNum());
-            map.put("type","航班预约");
-            map.put("name",flight.getFlightNum());
-            map.put("price",String.valueOf(flight.getPrice()));
-            map.put("cityName",flight.getFromCity() +"-->"+flight.getArivCity());
-            map.put("date",sdf.format(fr.getResDate()));
-
-            result.add(map);
-
-        }
-        //查询所有的出租车预约
-        Example carExample = new Example(CarReservation.class);
-        Example.Criteria criteria3 = carExample.createCriteria();
-        criteria3.andEqualTo("custName",custName);
-        List<CarReservation> carReservations = carReservationMapper.selectByExample(carExample);
-        for(CarReservation  cr :carReservations){
-            Map<String,String> map = new HashMap();
-
-            //查询出航班信息
-            Car car =  carMapper.selectByPrimaryKey(cr.getCarNum());
-            map.put("type","出租车预约");
-            map.put("name",car.getCarNum());
-            map.put("price",String.valueOf(car.getPrice()));
-            map.put("cityName",car.getCityName());
-            map.put("date",sdf.format(cr.getResDate()));
-
-            result.add(map);
-
-        }
-
-
         return result;
     }
 
@@ -182,22 +169,48 @@ public class ReservationService {
      */
     public void cancelResvs(String custName, String name, String type,String date) throws Exception{
 
+        Example example = new Example(Reservation.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("custName",custName);
+        criteria.andEqualTo("resvKey",name);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date2 = sdf.parse(date);
+        Date date1 = new Date(date2.getTime());
+
+        criteria.andEqualTo("resDate",date1);
         if("航班预约".equals(type)){
-            Example flightExample = new Example(FlightReservation.class);
-            Example.Criteria criteria = flightExample.createCriteria();
-            criteria.andEqualTo("custName",custName);
-            criteria.andEqualTo("flightNum",name);
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date date2 = sdf.parse(date);
-            Date date1 = new Date(date2.getTime());
-
-            criteria.andEqualTo("resDate",date1);
-            flightReservationMapper.deleteByExample(flightExample);
+            criteria.andEqualTo("type",1);
         }else if("宾馆预约".equals(type)){
-
+            criteria.andEqualTo("type",2);
         }else{
-
+            criteria.andEqualTo("type",3);
         }
+        reservationMapper.deleteByExample(example);
+    }
+
+    public List getMyTravel(String custName) {
+        List result = new ArrayList();
+        //查询所有的宾馆预约
+        Example example = new Example(Reservation.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("custName",custName);
+        criteria.andEqualTo("type",1);
+        example.setOrderByClause("resDate");
+        List<Reservation> reservations = reservationMapper.selectByExample(example);
+
+        //根据预约的航班决定出发城和目的城市
+        for(Reservation r :reservations){
+            Flight flight = flightMapper.selectByPrimaryKey(r.getResvKey());
+
+            Map map = new HashMap();
+            map.put("fromCity",flight.getFromCity());
+            map.put("arivCity",flight.getArivCity());
+            map.put("flightNum",flight.getFlightNum());
+
+            result.add(map);
+        }
+
+        return  result;
     }
 }

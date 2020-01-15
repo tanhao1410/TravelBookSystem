@@ -3,10 +3,8 @@ package com.tanhao.travelbook.service;
 import com.github.abel533.entity.Example;
 import com.github.abel533.mapper.Mapper;
 import com.tanhao.travelbook.bean.Car;
-import com.tanhao.travelbook.bean.CarReservation;
-import com.tanhao.travelbook.bean.Flight;
+import com.tanhao.travelbook.bean.Reservation;
 import com.tanhao.travelbook.dao.CarMapper;
-import com.tanhao.travelbook.dao.FlightMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,12 +46,17 @@ public class CarService extends BaseService<Car>{
         java.util.Date date2 = sdf.parse(date);
         Date date1 = new Date(date2.getTime());
 
-        CarReservation cr = new CarReservation();
+        Reservation cr = new Reservation();
 
         for(Car car:list){
             cr.setResDate(date1);
-            cr.setCarNum(car.getCarNum());
-            int count = reservationService.carReservationMapper.selectCount(cr);
+            cr.setResvKey(car.getCarNum());
+
+            Example example2 = new Example(Reservation.class);
+            Example.Criteria criteria2 = example2.createCriteria();
+            criteria2.andEqualTo("resDate", date1);
+            criteria2.andEqualTo("resvKey", car.getCarNum());
+            int count = reservationService.reservationMapper.selectCountByExample(example2);
             if(count == 0){
                 result.add(car);
             }

@@ -51,3 +51,8 @@ function resevFlight(flightNum) {
 
 }
 
+$(document).ready(function(){
+
+    showAdminContent();
+
+});

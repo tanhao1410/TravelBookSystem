@@ -3,7 +3,7 @@ package com.tanhao.travelbook.service;
 import com.github.abel533.entity.Example;
 import com.github.abel533.mapper.Mapper;
 import com.tanhao.travelbook.bean.Flight;
-import com.tanhao.travelbook.bean.FlightReservation;
+import com.tanhao.travelbook.bean.Reservation;
 import com.tanhao.travelbook.dao.FlightMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,11 +47,11 @@ public class FlightService extends BaseService<Flight>{
         for(Flight flight1 : list){
 
             //获取该航班还剩下多少个座位
-            Example example2 = new Example(FlightReservation.class);
+            Example example2 = new Example(Reservation.class);
             Example.Criteria criteria2 = example2.createCriteria();
             criteria2.andEqualTo("resDate",date1);
-            criteria2.andEqualTo("flightNum",flight1.getFlightNum());
-            int count =  reservationService.flightReservationMapper.selectCountByExample(example2);
+            criteria2.andEqualTo("resvKey",flight1.getFlightNum());
+            int count =  reservationService.reservationMapper.selectCountByExample(example2);
 
             flight1.setNumSeats(flight1.getNumSeats() - count);
 

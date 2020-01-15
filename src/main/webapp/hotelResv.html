@@ -19,7 +19,7 @@
     <script src="js/hotelResv.js"></script>
     <script src="js/common.js"></script>
 </head>
-<body>
+<body style="margin:10px;">
 <div class="page-header">
     <h1>旅游预订系统
         <small>预约旅馆</small>
@@ -42,13 +42,13 @@
 <div class="lgD">
     <input id="city" type="text"
            placeholder="城市" />
-    <input id="date" type="text" value="2019-02-03"
+    <input id="date" type="text"
            placeholder="日期,按：2019-02-03输入" />
     <a onclick="searchHotel()" target="_self"><button>查  询</button></a>
 </div>
 
 
-<table id="hotelTable"  style="width:100%">
+<table id="hotelTable"  border="1" cellspacing="0" style="width:90%">
     <thead>
     <tr id="hotelTr">
         <th>旅馆名称</th>

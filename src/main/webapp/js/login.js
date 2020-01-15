@@ -19,7 +19,13 @@ function enter() {
         data : "",
         success : function(data) {
           if(data.password == $("#password").val()){
-              window.location.href="/index.html?custName="+$("#custName").val();
+              console.info(data);
+              if(data.type == 0){
+                  window.location.href="/index.html?custName="+$("#custName").val()+"&type=admin";
+              }else{
+                  window.location.href="/index.html?custName="+$("#custName").val()+"&type=normal";
+              }
+
           }else{
               alert("密码错误！")
           }
@@ -35,7 +41,8 @@ function enter() {
 function addCust() {
     var param = {
         custName:$("#custName").val(),
-        password:$("#password").val()
+        password:$("#password").val(),
+        type:1
     };
     $.ajax({
         type: "POST",
@@ -45,7 +52,7 @@ function addCust() {
         contentType:"application/json;charset=utf-8",
         success: function(data) {
             alert("注册成功")
-            window.location.href="/index.html?custName="+$("#custName").val();
+            window.location.href="/index.html?custName="+$("#custName").val()+"&type=normal";
         },
         error: function(data) {
             alert("注册失败！")

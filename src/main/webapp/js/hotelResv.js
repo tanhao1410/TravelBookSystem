@@ -49,3 +49,9 @@ function resevHotel(hotelName) {
 
 }
 
+
+$(document).ready(function(){
+
+    showAdminContent();
+
+});

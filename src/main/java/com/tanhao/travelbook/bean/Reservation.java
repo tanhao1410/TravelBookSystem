@@ -3,21 +3,26 @@ package com.tanhao.travelbook.bean;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import java.sql.Date;
-@Table(name="HotelReservation")
-public class HotelReservation {
-    @Column(name="hotelName")
-    private String hotelName;
+
+@Table(name="Reservation")
+public class Reservation {
+    @Column(name="resvKey")
+    private String resvKey;
     @Column(name="custName")
     private String custName;
-    @Column(name="resDate")
-    private Date resDate;
 
-    public String getHotelName() {
-        return hotelName;
+    @Column(name="resDate")
+
+    private Date resDate;
+    @Column(name="type")
+    private int type;
+
+    public String getResvKey() {
+        return resvKey;
     }
 
-    public void setHotelName(String hot) {
-        this.hotelName = hot;
+    public void setResvKey(String resvKey) {
+        this.resvKey = resvKey;
     }
 
     public String getCustName() {
@@ -34,5 +39,13 @@ public class HotelReservation {
 
     public void setResDate(Date resDate) {
         this.resDate = resDate;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

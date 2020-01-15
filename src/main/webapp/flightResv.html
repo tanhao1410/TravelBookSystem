@@ -19,7 +19,7 @@
     <script src="js/flightResv.js"></script>
     <script src="js/common.js"></script>
 </head>
-<body>
+<body style="margin:10px;">
 <div class="page-header">
     <h1>旅游预订系统
         <small>预约航班</small>
@@ -39,18 +39,18 @@
 </div>
 
 <div class="lgD">
-    <input id = "fromCity" type="text" value="北京"
+    <input id = "fromCity" type="text"
            placeholder="出发地" />
-    <input id="arivCity" type="text" value="上海"
+    <input id="arivCity" type="text"
            placeholder="到达地" />
-    <input id="date" type="text" value="2019-02-03"
+    <input id="date" type="text"
            placeholder="日期,按：2019-02-03输入" />
 
     <a onclick="searchFlight()" target="_self"><button>查  询</button></a>
 </div>
 
 
-<table id="flightTable"  style="width:100%">
+<table id="flightTable"   border="1" cellspacing="0" style="width:90%">
     <thead>
     <tr id="flightTr">
         <th>航班号</th>

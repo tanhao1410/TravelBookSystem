@@ -48,4 +48,8 @@ function resevCar(carNum) {
     });
 
 }
+$(document).ready(function(){
 
+    showAdminContent();
+
+});

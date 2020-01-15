@@ -19,7 +19,7 @@
     <script src="js/carResv.js"></script>
     <script src="js/common.js"></script>
 </head>
-<body>
+<body style="margin:10px;">
 <div class="page-header">
     <h1>旅游预订系统
         <small>预约出租车</small>
@@ -39,16 +39,16 @@
 </div>
 
 <div class="lgD">
-    <input id = "cityName" type="text" value="北京"
+    <input id = "cityName" type="text"
            placeholder="出发地" />
-    <input id="date" type="text" value="2019-02-03"
+    <input id="date" type="text"
            placeholder="日期,按：2019-02-03输入" />
 
     <a onclick="searchCar()" target="_self"><button>查  询</button></a>
 </div>
 
 
-<table id="flightTable"  style="width:100%">
+<table id="flightTable"  border="1" cellspacing="0" style="width:90%">
     <thead>
     <tr id="flightTr">
         <th>出租车号</th>
